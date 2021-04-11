@@ -5,12 +5,11 @@ import csv
 import os
 
 # ToDo: CSS selectory
-# ToDo: DictReader, DictWriter, header
 
 URL = "https://markets.businessinsider.com/commodities/gold-price"
-DATE_FORMAT = '%d.%m.%Y %H:%M'
+# DATE_FORMAT = '%d.%m.%Y %H:%M'
 DATE_FORMAT = '%d.%m.%Y'
-
+HEADER = ["Date", "Price"]
 
 def request_gold_price() -> str:
     """Zjistí aktuální cenu zlata"""
@@ -26,16 +25,19 @@ def request_gold_price() -> str:
 
 def save_data(date: str, price: str) -> None:
     """Přidá data do souboru csv"""
-    if 'gold_prices.csv' in os.listdir():
+    if 'gold_prices2.csv' in os.listdir():
         mode = "a"
     else:
         mode = "w"
 
-    with open('gold_prices.csv', mode) as f:
+    with open('gold_prices2.csv', mode, newline="") as f:
         writer = csv.writer(f)
+        writer2 = csv.DictWriter(f, HEADER)
         if mode == "w":
-            writer.writerow(["date","price"])
-        writer.writerow([date, float(price)])
+            # writer.writerow(["date","price"])
+            writer2.writeheader()
+        # writer.writerow([date, float(price)])
+        writer2.writerow({HEADER[0]: date, HEADER[1]: float(price)})
 
 
 def main():
