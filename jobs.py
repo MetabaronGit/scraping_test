@@ -12,6 +12,7 @@
 import bs4
 import requests
 import sys
+import datetime
 
 
 def make_soup(url: str) -> bs4.BeautifulSoup:
@@ -34,11 +35,26 @@ def main():
         expression="python", location="hradec-kralove", radius="0")
     html_doc = make_soup(url)
 
-    jobs = html_doc.find_all("h3", class_="search-list__main-info__title")
-    for job in jobs:
-        job_name = job.text.strip()
-        link = job.find("a").attrs["href"]
-        print(f"{job_name}: {link}")
+    # jobs = html_doc.find_all("h3", class_="search-list__main-info__title")
+    # for job in jobs:
+    #      job_name = job.text.strip()
+    #      link = job.find("a").attrs["href"]
+    #      employer = job.find("div", class_="search-list__main-info__company")
+    #      print(job)
+    #      print(f"{employer}, {job_name}: {link}")
+
+
+    # from jobs.html
+    # job = html_doc.find("div", class_="search-list__status__data")
+    # print(job)
+
+    # date_tag = job.find("span", class_="label-added")
+    # date = date_tag.attrs["data-label-added-valid-from"]
+    # print(date)
+    # print(datetime.datetime.now())
+
+    one_grid = html_doc.find("div", class_="grid")
+    print(one_grid)
 
 
 
