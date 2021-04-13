@@ -35,26 +35,25 @@ def main():
         expression="python", location="hradec-kralove", radius="0")
     html_doc = make_soup(url)
 
-    # jobs = html_doc.find_all("h3", class_="search-list__main-info__title")
-    # for job in jobs:
-    #      job_name = job.text.strip()
-    #      link = job.find("a").attrs["href"]
-    #      employer = job.find("div", class_="search-list__main-info__company")
-    #      print(job)
-    #      print(f"{employer}, {job_name}: {link}")
+    jobs = html_doc.find_all("h3", class_="search-list__main-info__title")
+    for job in jobs:
+         job_name = job.text.strip()
+         link = job.find("a").attrs["href"]
+         print(f"{job_name}: {link}")
+
+    employers = html_doc.find_all("div", class_="search-list__main-info__company")
+    for employer in employers:
+        print(employer.text.strip())
+
+    date_tags = html_doc.find_all("div", class_="search-list__status")
+    for date_tag in date_tags:
+        print(date_tag)
+        date = date_tag.find("span", class_="label-added").attrs["data-label-added-valid-from"]
+        print(date)
+        # print(datetime.datetime.now())
 
 
-    # from jobs.html
-    # job = html_doc.find("div", class_="search-list__status__data")
-    # print(job)
 
-    # date_tag = job.find("span", class_="label-added")
-    # date = date_tag.attrs["data-label-added-valid-from"]
-    # print(date)
-    # print(datetime.datetime.now())
-
-    one_grid = html_doc.find("div", class_="grid")
-    print(one_grid)
 
 
 
