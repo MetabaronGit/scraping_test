@@ -11,8 +11,8 @@ soup = BeautifulSoup(html_doc.text, "html.parser")
 # print(root_childs)
 
 i = soup.select("body div")
-print(type(i))
+print(soup.prettify())
 # print(i)
 
-for tag in i:
-    print(tag)
+# for tag in i:
+#     print(tag)
